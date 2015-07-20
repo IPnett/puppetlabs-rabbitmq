@@ -40,6 +40,7 @@ class rabbitmq(
   $ssl_only                   = $rabbitmq::params::ssl_only,
   $ssl_cacert                 = $rabbitmq::params::ssl_cacert,
   $ssl_cert                   = $rabbitmq::params::ssl_cert,
+  $ssl_cert_login_from        = $rabbitmq::params::ssl_cert_login_from
   $ssl_key                    = $rabbitmq::params::ssl_key,
   $ssl_port                   = $rabbitmq::params::ssl_port,
   $ssl_interface              = $rabbitmq::params::ssl_interface,
