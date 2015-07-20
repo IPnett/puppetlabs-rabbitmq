@@ -1,5 +1,6 @@
 # Main rabbitmq class
 class rabbitmq(
+  $auth_mechanisms            = $rabbitmq::params::auth_mechanisms
   $admin_enable               = $rabbitmq::params::admin_enable,
   $cluster_node_type          = $rabbitmq::params::cluster_node_type,
   $cluster_nodes              = $rabbitmq::params::cluster_nodes,
@@ -31,6 +32,7 @@ class rabbitmq(
   $rabbitmq_home              = $rabbitmq::params::rabbitmq_home,
   $port                       = $rabbitmq::params::port,
   $tcp_keepalive              = $rabbitmq::params::tcp_keepalive,
+  $sasl                       = $rabbitmq::params::sasl
   $service_ensure             = $rabbitmq::params::service_ensure,
   $service_manage             = $rabbitmq::params::service_manage,
   $service_name               = $rabbitmq::params::service_name,
@@ -67,6 +69,7 @@ class rabbitmq(
   $key_content                = undef,
 ) inherits rabbitmq::params {
 
+  validate_array($auth_mechanisms)
   validate_bool($admin_enable)
   # Validate install parameters.
   validate_re($package_apt_pin, '^(|\d+)$')
@@ -107,10 +110,12 @@ class rabbitmq(
   validate_re($service_ensure, '^(running|stopped)$')
   validate_bool($service_manage)
   validate_string($service_name)
+  validate_bool($sasl)
   validate_bool($ssl)
   validate_bool($ssl_only)
   validate_string($ssl_cacert)
   validate_string($ssl_cert)
+  validate_string($ssl_cert_login_from)
   validate_string($ssl_key)
   validate_array($ssl_ciphers)
   if ! is_integer($ssl_port) {
@@ -218,6 +223,14 @@ class rabbitmq(
 
   if ($ldap_auth) {
     rabbitmq_plugin { 'rabbitmq_auth_backend_ldap':
+      ensure  => present,
+      require => Class['rabbitmq::install'],
+      notify  => Class['rabbitmq::service'],
+    }
+  }
+
+  if ($sasl) {
+     rabbitmq_plugin { 'rabbitmq_auth_mechanism_ssl':
       ensure  => present,
       require => Class['rabbitmq::install'],
       notify  => Class['rabbitmq::service'],
