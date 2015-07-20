@@ -1,6 +1,6 @@
 # Main rabbitmq class
 class rabbitmq(
-  $auth_mechanisms            = $rabbitmq::params::auth_mechanisms
+  $auth_mechanisms            = $rabbitmq::params::auth_mechanisms,
   $admin_enable               = $rabbitmq::params::admin_enable,
   $cluster_node_type          = $rabbitmq::params::cluster_node_type,
   $cluster_nodes              = $rabbitmq::params::cluster_nodes,
@@ -32,7 +32,7 @@ class rabbitmq(
   $rabbitmq_home              = $rabbitmq::params::rabbitmq_home,
   $port                       = $rabbitmq::params::port,
   $tcp_keepalive              = $rabbitmq::params::tcp_keepalive,
-  $sasl                       = $rabbitmq::params::sasl
+  $sasl                       = $rabbitmq::params::sasl,
   $service_ensure             = $rabbitmq::params::service_ensure,
   $service_manage             = $rabbitmq::params::service_manage,
   $service_name               = $rabbitmq::params::service_name,
@@ -40,7 +40,7 @@ class rabbitmq(
   $ssl_only                   = $rabbitmq::params::ssl_only,
   $ssl_cacert                 = $rabbitmq::params::ssl_cacert,
   $ssl_cert                   = $rabbitmq::params::ssl_cert,
-  $ssl_cert_login_from        = $rabbitmq::params::ssl_cert_login_from
+  $ssl_cert_login_from        = $rabbitmq::params::ssl_cert_login_from,
   $ssl_key                    = $rabbitmq::params::ssl_key,
   $ssl_port                   = $rabbitmq::params::ssl_port,
   $ssl_interface              = $rabbitmq::params::ssl_interface,
