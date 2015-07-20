@@ -64,6 +64,7 @@ class rabbitmq::params {
   }
 
   #install
+  $auth_mechanisms            = ['PLAIN']
   $admin_enable               = true
   $management_port            = '15672'
   $management_ssl             = true
@@ -90,10 +91,12 @@ class rabbitmq::params {
   $node_ip_address            = 'UNSET'
   $port                       = '5672'
   $tcp_keepalive              = false
+  $sasl                       = false
   $ssl                        = false
   $ssl_only                   = false
   $ssl_cacert                 = 'UNSET'
   $ssl_cert                   = 'UNSET'
+  $ssl_cert_login_from        = 'UNSET'
   $ssl_key                    = 'UNSET'
   $ssl_port                   = '5671'
   $ssl_interface              = 'UNSET'

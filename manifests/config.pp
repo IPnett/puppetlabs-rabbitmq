@@ -3,6 +3,7 @@
 # config and ssl.
 class rabbitmq::config {
 
+  $auth_mechanisms            = $rabbitmq::auth_mechanisms
   $admin_enable               = $rabbitmq::admin_enable
   $cluster_node_type          = $rabbitmq::cluster_node_type
   $cluster_nodes              = $rabbitmq::cluster_nodes
@@ -30,6 +31,7 @@ class rabbitmq::config {
   $ssl_only                   = $rabbitmq::ssl_only
   $ssl_cacert                 = $rabbitmq::ssl_cacert
   $ssl_cert                   = $rabbitmq::ssl_cert
+  $ssl_cert_login_from        = $rabbitmq::ssl_cert_login_from
   $ssl_key                    = $rabbitmq::ssl_key
   $ssl_port                   = $rabbitmq::ssl_port
   $ssl_interface              = $rabbitmq::ssl_interface
