@@ -37,6 +37,9 @@
   <%- if @sasl -%>
     {auth_mechanisms, [<%= @auth_mechanisms.sort.map { |v| "'#{v}'" }.join(', ') %>]}, 
   <%- end -%>
+  <%- if @ssl_cert_login_from != 'UNSET' -%>
+    {ssl_cert_login_from, <%= @ssl_cert_login_from %>},
+  <%- end -%>
     {ssl_options, [
                    <%- if @ssl_cacert != 'UNSET' -%>
                    {cacertfile,"<%= @ssl_cacert %>"},
@@ -44,9 +47,6 @@
                    {certfile,"<%= @ssl_cert %>"},
                    {keyfile,"<%= @ssl_key %>"},
                    {verify,<%= @ssl_verify %>},
-                   <%- if @ssl_cert_login_from != 'UNSET' -%>
-                   {ssl_cert_login_from, <%= @ssl_cert_login_from %>},
-                   <%- end -%>
                    {fail_if_no_peer_cert,<%= @ssl_fail_if_no_peer_cert %>}
                    <%- if @ssl_versions -%>
                    ,{versions, [<%= @ssl_versions.sort.map { |v| "'#{v}'" }.join(', ') %>]}
